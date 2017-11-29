@@ -2,7 +2,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -15,7 +18,9 @@ import java.util.stream.Collectors;
  */
 public class testExample {
     public static void main(String[] args) throws Exception {
-
+        System.out.println(doesNotContainInteger());
+        Arrays.stream(getMovieTitles3("spiderman&page=1")).forEach(System.out::println);
+        System.out.println(sumPyramidRow2(5));
         getMovieTitles("https://jsonmock.hackerrank.com/api/movies/search/?Title=spiderman");
         System.out.println(sumPyramidRow(5));
         stringPyramid();
@@ -274,6 +279,68 @@ public class testExample {
         String[] stringTitle = new String[title.size()];
         stringTitle = title.toArray(stringTitle);
         return stringTitle;
+    }
+
+    static int sumPyramidRow2(int row) {
+        int numberInRow = row;
+        int firstNumber = ((row * (row - 1)) / 2) + 1;
+        int sum = 0;
+        for (int j = 0; j < numberInRow; j++) {
+            sum += firstNumber + j;
+
+        }
+
+
+        return sum;
+
+    }
+
+    static String[] getMovieTitles3(String substr) throws Exception {
+        String content = readUrl("https://jsonmock.hackerrank.com/api/movies/search/?Title=" + substr);
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+        System.out.println(content);
+        Map<String, Object> json = (Map<String, Object>) engine.eval("(" + content + ");");
+        int totalPages = (int) json.get("total_pages");
+        String page = String.valueOf(json.get("page"));
+
+        List<Map<String, Object>> data = ((ScriptObjectMirror) json.get("data")).to(List.class);
+
+        List<String> titles = new ArrayList<>();
+
+        data.stream().map(movie -> movie.get("Title")).forEach(title -> titles.add((String) title));
+
+        return titles.toArray(new String[]{});
+    }
+
+    private static String readUrl(String urlString) throws Exception {
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(urlString);
+            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            StringBuffer buffer = new StringBuffer();
+            int read;
+            char[] chars = new char[1024];
+            while ((read = reader.read(chars)) != -1)
+                buffer.append(chars, 0, read);
+
+            return buffer.toString();
+        } finally {
+            if (reader != null)
+                reader.close();
+        }
+    }
+    public static int doesNotContainInteger() {
+        int[] A = {1,5,3, 6, 4, 1, 2};
+        int num = 1;
+        HashSet<Integer> hset = new HashSet<Integer>();
+        for (int i = 0 ; i < A.length; i++) {
+            hset.add(A[i]);//0
+            while (hset.contains(num)) {//1 false
+                num++;
+            }
+        }
+        hset.forEach(System.out::println);
+        return num;
     }
 }
 
