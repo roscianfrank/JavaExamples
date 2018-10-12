@@ -22,7 +22,7 @@ public class testExample {
         print2largest(array,array.length);
 
         System.out.println(Arrays.toString(max2()));
-        /*System.out.println(doesNotContainInteger());
+        System.out.println(doesNotContainInteger());
         Arrays.stream(getMovieTitles3("spiderman&page=1")).forEach(System.out::println);
         System.out.println(sumPyramidRow2(5));
         getMovieTitles("https://jsonmock.hackerrank.com/api/movies/search/?Title=spiderman");
@@ -55,8 +55,8 @@ public class testExample {
 
         System.out.println("Reverse String :" + String.valueOf(arr));
 
-        String[] array = {"earth", "mars", "mercury"};
-        Arrays.stream(array).map(s -> new StringBuilder(s).reverse().toString()).forEach(System.out::println);*/
+        String[] array1 = {"earth", "mars", "mercury"};
+        Arrays.stream(array1).map(s -> new StringBuilder(s).reverse().toString()).forEach(System.out::println);
     }
 
     public static String reverse(String input) {
