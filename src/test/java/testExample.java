@@ -18,7 +18,11 @@ import java.util.stream.Collectors;
  */
 public class testExample {
     public static void main(String[] args) throws Exception {
-        System.out.println(doesNotContainInteger());
+        int array[]={12, 45, 45, 47, 90, 80,10,90};
+        print2largest(array,array.length);
+
+        System.out.println(Arrays.toString(max2()));
+        /*System.out.println(doesNotContainInteger());
         Arrays.stream(getMovieTitles3("spiderman&page=1")).forEach(System.out::println);
         System.out.println(sumPyramidRow2(5));
         getMovieTitles("https://jsonmock.hackerrank.com/api/movies/search/?Title=spiderman");
@@ -52,7 +56,7 @@ public class testExample {
         System.out.println("Reverse String :" + String.valueOf(arr));
 
         String[] array = {"earth", "mars", "mercury"};
-        Arrays.stream(array).map(s -> new StringBuilder(s).reverse().toString()).forEach(System.out::println);
+        Arrays.stream(array).map(s -> new StringBuilder(s).reverse().toString()).forEach(System.out::println);*/
     }
 
     public static String reverse(String input) {
@@ -124,11 +128,9 @@ public class testExample {
     }
 
     public static int[] max2() {
-        Integer[] numbers = new Integer[]{1, 2, 1, 3, 4, 4};
+        Integer[] numbers = new Integer[]{100, 2, 1, 3, 40, 4};
         Arrays.sort(numbers, Collections.reverseOrder());
-        /*for (int a : numbers) {
-            System.out.println(a);
-        }*/
+
         int b[] = new int[2];
 
         b[0] = numbers[0];
@@ -341,6 +343,44 @@ public class testExample {
         }
         hset.forEach(System.out::println);
         return num;
+    }
+    public static void print2largest(int arr[], int arr_size)
+    {
+        int i, first, second, third;
+
+        /* There should be atleast two elements */
+        if (arr_size < 3)
+        {
+            System.out.print(" Invalid Input ");
+            return;
+        }
+
+        third = first = second = Integer.MIN_VALUE;
+        for (i = 0; i < arr_size ; i ++)
+        {
+            /* If current element is smaller than
+            first*/
+            if (arr[i] > first)
+            {
+                third = second;
+                second = first;
+                first = arr[i];
+            }
+
+            /* If arr[i] is in between first and
+            second then update second  */
+            else if (arr[i] > second)
+            {
+                third = second;
+                second = arr[i];
+            }
+
+            else if (arr[i] > third)
+                third = arr[i];
+        }
+
+        System.out.println("Three largest elements are " +
+                first + " " + second + " " + third);
     }
 }
 
