@@ -44,7 +44,8 @@ public class TestCalculator {
     @Test
     public void testPerform(){
         when(service.add(2,3)).thenReturn(5);
-        assertEquals(10,c.perform(2,3));
+        assertEquals("Sum is not correct ",10,c.perform(2,3));
         verify(service,times(1)).add(2,3); // to verify
+        System.out.println("Test passed");
     }
 }
