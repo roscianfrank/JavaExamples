@@ -145,15 +145,6 @@
         </dependency>
 
     </dependencies>
-    <profiles>
-        <profile>
-            <id>Demographic</id>
-            <properties>
-                <profile.test>demographic</profile.test>
-                <site.test>http://44.440.411.80:8081/</site.test>
-            </properties>
-        </profile>
-    </profiles>
     <build>
         <plugins>
             <plugin>
@@ -179,16 +170,6 @@
                         <version>2.20.1</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                    <systemPropertyVariables>
-                        <site>${site.test}</site>
-                        <profile>${profile.test}</profile>>
-                        <authKey>${authKey.test}</authKey>
-                    </systemPropertyVariables>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
