@@ -21,10 +21,10 @@ class PrintLargest {
 
     static void max2() {
         long startTime = System.nanoTime();
-        Integer[] numbers = new Integer[]{1, 2, 5, 4, 57, 54, 656, 4};
+        Integer[] numbers = new Integer[]{500, 1, 2, 5, 4, 57, 54, 656, 4};
         Arrays.sort(numbers, Collections.reverseOrder());
 
-        int b[] = new int[2];
+        int[] b = new int[2];
 
         b[0] = numbers[0];
         b[1] = numbers[1];
@@ -37,8 +37,9 @@ class PrintLargest {
 
     static void max3() {
         long startTime = System.nanoTime();
-        int[] numbers = new int[]{1, 2, 5, 4, 57, 54, 656, 4};
-        int maxSize = 2;
+        int[] numbers = new int[]{1, 2, 500 , 4, 57, 54, 656, 4};
+        int maxSize = 3;
+        System.out.println("Max 3 numbers are: ");
         Arrays.stream(numbers) //stream
                 .boxed()  //to Integer Object
                 .sorted(Comparator.reverseOrder()) //sorted
